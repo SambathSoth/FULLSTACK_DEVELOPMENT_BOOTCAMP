@@ -8,6 +8,9 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+const tasklist = require('./routes/api/tasklist')
+const { request } = require('express')
+
 // Handle production
 if (process.env.NODE_ENV === 'production') {
     // Static folder
@@ -15,12 +18,11 @@ if (process.env.NODE_ENV === 'production') {
 
     // Handle SPA
     app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
+}
 
-    const tasklist = require('./routes/api/tasklist')
-    const { request } = require('express')
 
-    app.use('/api/tasklist', tasklist)
+app.use('/api/tasklist', tasklist)
 
-    const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000
 
-    app.listen(port, () => console.log(`Server started on port ${port}`))
+app.listen(port, () => console.log(`Server started on port ${port}`))
