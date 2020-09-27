@@ -8,7 +8,16 @@ const app = express()
 app.use(bodyParser.json())
 app.use(cors())
 
+// Handle production
+if (process.env.NODE_ENV === 'production') {
+    // Staric folder
+    app.use(express.static(__dirname + '/public/'))
+
+    // Handle SPA
+    app.get(/.*/, (req, res) => res.sendFile(__dirname + 'public/index.html'))
+}
 const tasklist = require('./routes/api/tasklist')
+const { request } = require('express')
 
 app.use('/api/tasklist', tasklist)
 

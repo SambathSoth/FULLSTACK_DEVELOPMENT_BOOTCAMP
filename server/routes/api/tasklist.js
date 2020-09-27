@@ -29,7 +29,7 @@ router.delete('/:id', async(req, res) => {
 
 async function loadTasksCollection() {
     const client = await mongodb.MongoClient.connect(
-        'mongodb+srv://Sambath:1234@my-tasklist.tjw7y.mongodb.net/<dbname>?retryWrites=true&w=majority', {
+        'mongodb+srv://Sambath:1234@my-tasklist.tjw7y.mongodb.net/Sambath?retryWrites=true&w=majority', {
             useNewUrlParser: true
         }
     )
