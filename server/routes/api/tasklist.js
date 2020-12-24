@@ -10,6 +10,12 @@ router.get('/', async(req, res) => {
     res.send(await mytasks.find({}).toArray())
 })
 
+// Get Task
+router.get('/:id', async(req, res) => {
+    const mytasks = await loadTasksCollection()
+    res.send(await mytasks.find({ "_id": id }).toArray)
+})
+
 // Add Task
 router.post('/', async(req, res) => {
     const mytasks = await loadTasksCollection()
